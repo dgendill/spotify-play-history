@@ -6,7 +6,7 @@ A nodejs script to periodically download your [recently played spotify tracks]((
 
 Download [dgendill/spotify-play-history](https://github.com/dgendill/spotify-play-history) and run `npm install` in the project root. Create a new app in the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/applications). Enter the Client ID in the `server/index.html` file. Run `npm run server`, which will start the local server, open `server/index.html` in the browser, and redirect to the Spotify authorization page. Grant access to the app. Spotify will redirect you to `server/callback/index.html` where you will be shown an access code. Create a file named `credentials.json` in the root of the project, and copy the access code, client id, and client secret into it.
 
-```
+```javascript
 {
     "client_id" : "<Client ID>",
     "client_secret" : "<Client Secret>",
@@ -16,7 +16,7 @@ Download [dgendill/spotify-play-history](https://github.com/dgendill/spotify-pla
 
 Now run `node run.js` in the project root. After, you should have a json file of recently played tracks in the `/data` folder. From here, you can setup Windows Task Manager or linux crontab to run the task every half hour. This is how I setup crontab...
 
-```
+```crontab
 0 * * * * /home/dom/.nvm/versions/node/v10.15.0/bin/node /home/dom/projects/Spotify/run.js
 30 * * * * /home/dom/.nvm/versions/node/v10.15.0/bin/node /home/dom/projects/Spotify/run.js
 ```
@@ -33,7 +33,7 @@ To start, we'll create a new app in the [Spotify Developer Dashboard](https://de
 
 After setup, Spotify will give us a Client ID and Client Secret. We'll put the Client ID in an html document that will redirect to the Spotify authorization page (Step 1 of the Authorization Code Flow). This file can be found in `server/index.html`.
 
-```language-html
+```html
 <html>
 <head>
     <script>
@@ -65,7 +65,7 @@ After setup, Spotify will give us a Client ID and Client Secret. We'll put the C
 
 We also created `server/callback/index.html` where Spotify will redirect after the user authorizes.
 
-```language-html
+```html
 <html>
 <head>
 <script>
@@ -98,7 +98,7 @@ http-server ./server -p 8888 -o
 
 You should see a Spotify page asking you to authorizing the app. After authorizing it, you will be redirected to the callback page and given an access code. Save this code, the client id, and the client secret to a new file named `credentials.json` in the project root.
 
-```language-javascript
+```javascript
 {
     "client_id" : "<Client ID>",
     "client_secret" : "<Client Secret>",
@@ -110,7 +110,7 @@ We then create the [run.js](https://github.com/dgendill/spotify-play-history/blo
 
 (Note that I'm using [request](https://www.npmjs.com/package/request) for making http requests, and [btoa](https://www.npmjs.com/package/btoa) for base 64 encoding.)
 
-```language-javascript
+```javascript
 //    ClientIDString
 // -> ClientSecretString
 // -> AuthorizationCodeString
@@ -155,7 +155,7 @@ This API call will return a refresh token that will be saved to `authorization.j
 
 Here's how we get an access token using the refresh token...
 
-```language-javascript
+```javascript
 //    ClientIDString
 // -> ClientSecretString
 // -> RefreshTokenString
@@ -189,7 +189,7 @@ function AuthorizeWithRefreshToken(client_id, client_secret, refresh_token) {
 
 And here is how we get the most recent tracks using the access token...
 
-```language-javascript
+```javascript
 // String -> ISO8601(UTC)String -> Promise Error { items : Array TrackInfo }
 // Get all tracks after a specific date and time
 function GetRecentTracks(access_token, afterTimestamp) {
@@ -230,7 +230,7 @@ function GetRecentTracks(access_token, afterTimestamp) {
 
 Those are the essentials pieces of interacting with the API. After making the requests, we save the server response to a new file using the [fs module](https://nodejs.org/api/fs.html).
 
-```language-javascript
+```javascript
 function saveNew(tracks) {
 
     var directory = __dirname + '/data';
