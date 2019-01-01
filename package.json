@@ -1,0 +1,24 @@
+{
+  "name": "spotify-user-play-history",
+  "version": "1.0.0",
+  "description": "",
+  "main": "run.js",
+  "scripts": {
+    "server": "http-server ./server -p 8888 -o",
+    "get-recent-tracks": "node run.js",
+    "list-played-tracks": "node scripts/show-history.js"
+  },
+  "author": "Dominick Gendill <https://www.dgendill.com>",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.3",
+    "btoa": "^1.2.1",
+    "http-server": "^0.11.1",
+    "lodash": "^4.17.11",
+    "request": "^2.88.0"
+  },
+  "engines": {
+    "node": ">=6.10"
+  },
+  "engineStrict": true
+}

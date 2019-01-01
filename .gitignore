@@ -1,0 +1,6 @@
+.vscode
+images
+node_modules
+authorization.json
+credentials.json
+data/*.json

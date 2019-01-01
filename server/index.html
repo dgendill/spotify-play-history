@@ -1,0 +1,28 @@
+<html>
+<head>
+    <script>
+    // Tell spotify we want access to the user's
+    // recently played tracks
+    var scopes = 'user-read-recently-played';
+
+    // Tell spotify which app is requesting access
+    var my_client_id = '0d08298cb6724992adb042a99ae51c13';
+    var redirect_uri = 'http://localhost:8888/callback';
+
+    // Build the URL where Spotify will ask the user to
+    // authorize our app
+    var url = 'https://accounts.spotify.com/authorize' +
+        '?response_type=code' +
+        '&client_id=' + my_client_id +
+        (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
+        '&redirect_uri=' + encodeURIComponent(redirect_uri);
+
+    // Redirect the authorization url
+    window.location = url;
+
+    </script>
+</head>
+<body>
+    <h1>Wait for Redirect...</h1>
+</body>
+</html>
