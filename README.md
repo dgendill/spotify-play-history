@@ -4,7 +4,7 @@ A nodejs script to periodically download your [recently played spotify tracks]((
 
 # Quick Start
 
-Download [dgendill/spotify-play-history](https://github.com/dgendill/spotify-play-history) and run `npm install` in the project root. Create a new app in the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/applications). Enter the Client ID in the `server/index.html` file. Run `npm run server`, which will start the local server, open `server/index.html` in the browser, and redirect to the Spotify authorization page. Grant access to the app. Spotify will redirect you to `server/callback/index.html` where you will be shown an access code. Create a file named `credentials.json` in the root of the project, and copy the access code, client id, and client secret into it.
+Download [dgendill/spotify-play-history](https://github.com/dgendill/spotify-play-history) and run `npm install` in the project root. Create a new app in the [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/applications). Enter the Client ID in the `server/index.html` file. Run `npm run server`, which will start the local server, open `http://localhost:8888/server/index.html` in the browser which should redirect you to the Spotify authorization page. Grant access to the app. Spotify will redirect you to `http://localhost:8888/server/callback/index.html` where you will be shown an access code. Create a file named `credentials.json` in the root of the project, and copy the access code, client id, and client secret into it. It should look like this...
 
 ```javascript
 {
@@ -25,7 +25,7 @@ Now run `node run.js` in the project root. After, you should have a json file of
 
 This tutorial will demonstrate how to use the Spotify API to keep track of your Spotify listening history. Since Spotify can't return your complete listening history, we'll build a script that periodically downloads [your recently played tracks](https://developer.spotify.com/documentation/web-api/reference/player/get-recently-played/) and saves them to a file. This script can be run with a task scheduler so you will always have a record of your latest play history. In a future post I'll show how to [wrangle](https://en.wikipedia.org/wiki/Data_wrangling) the data into a format we can more easily analyze.
 
-As we go forward, I'll assume you have downloaded [dgendill/spotify-play-history](https://github.com/dgendill/spotify-play-history). If you don't care how this whole system works and just want to download your history, you can skip to the project's [Quick Start](https://github.com/dgendill/spotify-play-history#quick-start)).
+As we go forward, I'll assume you have cloned the [dgendill/spotify-play-history](https://github.com/dgendill/spotify-play-history) repo. If you don't care how this whole system works and just want to download your history, you can skip to the project's [Quick Start](https://github.com/dgendill/spotify-play-history#quick-start)).
 
 We'll be using Nodejs to write a script that uses the [Authorization Code Flow](https://developer.spotify.com/documentation/general/guides/authorization-guide/#authorization-code-flow). We will manually run steps 1-2 of the flow. After that, steps 3 and 4 will be run by the script.
 
